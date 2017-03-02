@@ -5,43 +5,43 @@ namespace Version_1_C
     [Serializable()] 
     public class clsArtist
     {
-        private string name;
-        private string speciality;
-        private string phone;
+        private string _Name;
+        private string _Speciality;
+        private string _Phone;
         
-        private decimal theTotalValue;
+        private decimal _TotalValue;
 
-        private clsWorksList theWorksList;
-        private clsArtistList theArtistList;
+        private clsWorksList _WorksList;
+        private clsArtistList _ArtistList;
         
         private static frmArtist artistDialog = new frmArtist();
-        private byte sortOrder;
+        private byte _SortOrder;
 
         public clsArtist(clsArtistList prArtistList)
         {
-            theWorksList = new clsWorksList();
-            theArtistList = prArtistList;
+            _WorksList = new clsWorksList();
+            _ArtistList = prArtistList;
             EditDetails();
         }
         
         public void EditDetails()
         {
-            artistDialog.SetDetails(name, speciality, phone, sortOrder, theWorksList, theArtistList);
+            artistDialog.SetDetails(_Name, _Speciality, _Phone, _SortOrder, _WorksList, _ArtistList);
             if (artistDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                artistDialog.GetDetails(ref name, ref speciality, ref phone, ref sortOrder);
-                theTotalValue = theWorksList.GetTotalValue();
+                artistDialog.GetDetails(ref _Name, ref _Speciality, ref _Phone, ref _SortOrder);
+                _TotalValue = _WorksList.GetTotalValue();
             }
         }
 
         public string GetKey()
         {
-            return name;
+            return _Name;
         }
 
         public decimal GetWorksValue()
         {
-            return theTotalValue;
+            return _TotalValue;
         }
     }
 }

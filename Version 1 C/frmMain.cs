@@ -18,23 +18,23 @@ namespace Version_1_C
             InitializeComponent();
         }
 
-        private clsArtistList theArtistList = new clsArtistList();
-        private const string fileName = "gallery.xml";
+        private clsArtistList _ArtistList = new clsArtistList();
+        private const string _FileName = "gallery.xml";
 
-        private void UpdateDisplay()
+        private void updateDisplay()
         {
-            string[] lcDisplayList = new string[theArtistList.Count];
+            string[] lcDisplayList = new string[_ArtistList.Count];
 
             lstArtists.DataSource = null;
-            theArtistList.Keys.CopyTo(lcDisplayList, 0);
+            _ArtistList.Keys.CopyTo(lcDisplayList, 0);
             lstArtists.DataSource = lcDisplayList;
-            lblValue.Text = Convert.ToString(theArtistList.GetTotalValue());
+            lblValue.Text = Convert.ToString(_ArtistList.GetTotalValue());
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            theArtistList.NewArtist();
-            UpdateDisplay();
+            _ArtistList.NewArtist();
+            updateDisplay();
         }
 
         private void lstArtists_DoubleClick(object sender, EventArgs e)
@@ -44,14 +44,14 @@ namespace Version_1_C
             lcKey = Convert.ToString(lstArtists.SelectedItem);
             if (lcKey != null)
             {
-                theArtistList.EditArtist(lcKey);
-                UpdateDisplay();
+                _ArtistList.EditArtist(lcKey);
+                updateDisplay();
             }
         }
 
         private void btnQuit_Click(object sender, EventArgs e)
         {
-            Save();
+            save();
             Close();
         }
 
@@ -63,20 +63,20 @@ namespace Version_1_C
             if (lcKey != null)
             {
                 lstArtists.ClearSelected();
-                theArtistList.Remove(lcKey);
-                UpdateDisplay();
+                _ArtistList.Remove(lcKey);
+                updateDisplay();
             }
         }
 
-        private void Save()
+        private void save()
         {
             try
             {
-                System.IO.FileStream lcFileStream = new System.IO.FileStream(fileName, System.IO.FileMode.Create);
+                System.IO.FileStream lcFileStream = new System.IO.FileStream(_FileName, System.IO.FileMode.Create);
                 System.Runtime.Serialization.Formatters.Soap.SoapFormatter lcFormatter =
                     new System.Runtime.Serialization.Formatters.Soap.SoapFormatter();
 
-                lcFormatter.Serialize(lcFileStream, theArtistList);
+                lcFormatter.Serialize(lcFileStream, _ArtistList);
                 lcFileStream.Close();
             }
             catch (Exception e)
@@ -85,16 +85,16 @@ namespace Version_1_C
             }
         }
 
-        private void Retrieve()
+        private void retrieve()
         {
             try
             {
-                System.IO.FileStream lcFileStream = new System.IO.FileStream(fileName, System.IO.FileMode.Open);
+                System.IO.FileStream lcFileStream = new System.IO.FileStream(_FileName, System.IO.FileMode.Open);
                 System.Runtime.Serialization.Formatters.Soap.SoapFormatter lcFormatter =
                     new System.Runtime.Serialization.Formatters.Soap.SoapFormatter();
 
-                theArtistList = (clsArtistList)lcFormatter.Deserialize(lcFileStream);
-                UpdateDisplay();
+                _ArtistList = (clsArtistList)lcFormatter.Deserialize(lcFileStream);
+                updateDisplay();
                 lcFileStream.Close();
             }
 
@@ -106,8 +106,8 @@ namespace Version_1_C
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            Retrieve();
-            UpdateDisplay();
+            retrieve();
+            updateDisplay();
         }
     }
 }
