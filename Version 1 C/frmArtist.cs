@@ -38,7 +38,7 @@ namespace Version_1_C
             lblTotal.Text = Convert.ToString(_WorksList.GetTotalValue());
         }
 
-        public void SetDetails(string prName, string prSpeciality, string prPhone, byte prSortOrder,
+        public void SetDetails(string prName, string prSpeciality, string prPhone, 
                                clsWorksList prWorksList, clsArtistList prArtistList)
         {
             txtName.Text = prName;
@@ -46,16 +46,16 @@ namespace Version_1_C
             txtPhone.Text = prPhone;
             _ArtistList = prArtistList;
             _WorksList = prWorksList;
-            _SortOrder = prSortOrder;
+            _SortOrder = _WorksList.SortOrder;
             updateDisplay();
         }
 
-        public void GetDetails(ref string prName, ref string prSpeciality, ref string prPhone, ref byte prSortOrder)
+        public void GetDetails(ref string prName, ref string prSpeciality, ref string prPhone)
         {
             prName = txtName.Text;
             prSpeciality = txtSpeciality.Text;
             prPhone = txtPhone.Text;
-            prSortOrder = _SortOrder;
+            _SortOrder = _WorksList.SortOrder;
         }
 
         private void btnDelete_Click(object sender, EventArgs e)

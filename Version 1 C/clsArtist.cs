@@ -15,7 +15,7 @@ namespace Version_1_C
         private clsArtistList _ArtistList;
         
         private static frmArtist artistDialog = new frmArtist();
-        private byte _SortOrder;
+     
 
         public clsArtist(clsArtistList prArtistList)
         {
@@ -26,10 +26,10 @@ namespace Version_1_C
         
         public void EditDetails()
         {
-            artistDialog.SetDetails(_Name, _Speciality, _Phone, _SortOrder, _WorksList, _ArtistList);
+            artistDialog.SetDetails(_Name, _Speciality, _Phone, _WorksList, _ArtistList);
             if (artistDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                artistDialog.GetDetails(ref _Name, ref _Speciality, ref _Phone, ref _SortOrder);
+                artistDialog.GetDetails(ref _Name, ref _Speciality, ref _Phone);
                 _TotalValue = _WorksList.GetTotalValue();
             }
         }
