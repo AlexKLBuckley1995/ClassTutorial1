@@ -10,6 +10,7 @@ namespace Version_1_C
 {
     public partial class frmMain : Form
     {
+
         /// <summary>
         /// Matthias Otto, NMIT, 2010-2016
         /// </summary>
@@ -19,7 +20,7 @@ namespace Version_1_C
         }
 
         private clsArtistList _ArtistList = new clsArtistList();
-        private const string _FileName = "gallery.xml";
+    
 
         private void updateDisplay()
         {
@@ -51,7 +52,7 @@ namespace Version_1_C
 
         private void btnQuit_Click(object sender, EventArgs e)
         {
-            save();
+            _ArtistList.Save();
             Close();
         }
 
@@ -68,45 +69,11 @@ namespace Version_1_C
             }
         }
 
-        private void save()
-        {
-            try
-            {
-                System.IO.FileStream lcFileStream = new System.IO.FileStream(_FileName, System.IO.FileMode.Create);
-                System.Runtime.Serialization.Formatters.Soap.SoapFormatter lcFormatter =
-                    new System.Runtime.Serialization.Formatters.Soap.SoapFormatter();
-
-                lcFormatter.Serialize(lcFileStream, _ArtistList);
-                lcFileStream.Close();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "File Save Error");
-            }
-        }
-
-        private void retrieve()
-        {
-            try
-            {
-                System.IO.FileStream lcFileStream = new System.IO.FileStream(_FileName, System.IO.FileMode.Open);
-                System.Runtime.Serialization.Formatters.Soap.SoapFormatter lcFormatter =
-                    new System.Runtime.Serialization.Formatters.Soap.SoapFormatter();
-
-                _ArtistList = (clsArtistList)lcFormatter.Deserialize(lcFileStream);
-                updateDisplay();
-                lcFileStream.Close();
-            }
-
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "File Retrieve Error");
-            }
-        }
+       
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            retrieve();
+            _ArtistList.Retrieve();
             updateDisplay();
         }
     }
