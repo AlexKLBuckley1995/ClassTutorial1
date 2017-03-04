@@ -18,6 +18,7 @@ namespace Version_1_C
         private clsArtistList _ArtistList;
         private clsWorksList _WorksList;
         private byte _SortOrder; // 0 = Name, 1 = Date
+        private clsArtist _Artist;
 
         private void updateDisplay()
         {
@@ -38,24 +39,28 @@ namespace Version_1_C
             lblTotal.Text = Convert.ToString(_WorksList.GetTotalValue());
         }
 
-        public void SetDetails(string prName, string prSpeciality, string prPhone, 
-                               clsWorksList prWorksList, clsArtistList prArtistList)
+        private void updateForm()
         {
-            txtName.Text = prName;
-            txtSpeciality.Text = prSpeciality;
-            txtPhone.Text = prPhone;
-            _ArtistList = prArtistList;
-            _WorksList = prWorksList;
-            _SortOrder = _WorksList.SortOrder;
-            updateDisplay();
+            txtName.Text = _Artist.Name;
+            txtSpeciality.Text = _Artist.Speciality;
+            txtPhone.Text = _Artist.Phone;
+            _ArtistList = _Artist.ArtistList;
+            _WorksList = _Artist.WorksList;
         }
 
-        public void GetDetails(ref string prName, ref string prSpeciality, ref string prPhone)
+        private void pushData()
         {
-            prName = txtName.Text;
-            prSpeciality = txtSpeciality.Text;
-            prPhone = txtPhone.Text;
-            _SortOrder = _WorksList.SortOrder;
+            _Artist.Name = txtName.Text;
+            _Artist.Speciality = txtSpeciality.Text;
+            _Artist.Phone = txtPhone.Text;
+        }
+
+        public void SetDetails(clsArtist prArtist)
+        {
+            _Artist = prArtist;
+            updateForm();
+            updateDisplay();
+            ShowDialog();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -74,6 +79,7 @@ namespace Version_1_C
         {
             if (isValid())
             {
+                pushData();
                 DialogResult = DialogResult.OK;
             }
         }

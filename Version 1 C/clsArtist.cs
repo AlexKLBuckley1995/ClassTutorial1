@@ -15,7 +15,84 @@ namespace Version_1_C
         private clsArtistList _ArtistList;
         
         private static frmArtist artistDialog = new frmArtist();
-     
+
+        public string Name
+        {
+            get
+            {
+                return _Name;
+            }
+
+            set
+            {
+                _Name = value;
+            }
+        }
+
+        public string Speciality
+        {
+            get
+            {
+                return _Speciality;
+            }
+
+            set
+            {
+                _Speciality = value;
+            }
+        }
+
+        public string Phone
+        {
+            get
+            {
+                return _Phone;
+            }
+
+            set
+            {
+                _Phone = value;
+            }
+        }
+
+        public decimal TotalValue
+        {
+            get
+            {
+                return _TotalValue;
+            }
+
+          //  set
+            //{
+              //  _TotalValue = value;
+           // }
+        }
+
+        public clsWorksList WorksList
+        {
+            get
+            {
+                return _WorksList;
+            }
+
+           // set
+           // {
+             //   _WorksList = value;
+           // }
+        }
+
+        public clsArtistList ArtistList
+        {
+            get
+            {
+                return _ArtistList;
+            }
+
+            //set
+            //{
+              //  _ArtistList = value;
+            //}
+        }
 
         public clsArtist(clsArtistList prArtistList)
         {
@@ -26,22 +103,21 @@ namespace Version_1_C
         
         public void EditDetails()
         {
-            artistDialog.SetDetails(_Name, _Speciality, _Phone, _WorksList, _ArtistList);
+            artistDialog.SetDetails(this);
             if (artistDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                artistDialog.GetDetails(ref _Name, ref _Speciality, ref _Phone);
-                _TotalValue = _WorksList.GetTotalValue();
+                _TotalValue = WorksList.GetTotalValue();
             }
         }
 
-        public string GetKey()
-        {
-            return _Name;
-        }
+       // public string GetKey()
+       // {
+         //   return Name;
+      //  }
 
-        public decimal GetWorksValue()
-        {
-            return _TotalValue;
-        }
+        //public decimal GetWorksValue()
+       // {
+         //   return TotalValue;
+       /// }
     }
 }
