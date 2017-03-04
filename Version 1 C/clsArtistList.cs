@@ -1,17 +1,18 @@
 using System;
-using System.Collections;
+using System.Collections.Generic;
 using System.Windows.Forms;
+
 
 namespace Version_1_C
 {
     [Serializable()] 
-    public class clsArtistList : SortedList
+    public class clsArtistList : SortedList<string, clsArtist>
     {
         private const string _FileName = "gallery.xml";
         public void EditArtist(string prKey)
         {
             clsArtist lcArtist;
-            lcArtist = (clsArtist)this[prKey];
+            lcArtist = this[prKey];
             if (lcArtist != null)
                 lcArtist.EditDetails();
             else
@@ -50,8 +51,8 @@ namespace Version_1_C
             try
             {
                 System.IO.FileStream lcFileStream = new System.IO.FileStream(_FileName, System.IO.FileMode.Create);
-                System.Runtime.Serialization.Formatters.Soap.SoapFormatter lcFormatter =
-                    new System.Runtime.Serialization.Formatters.Soap.SoapFormatter();
+                System.Runtime.Serialization.Formatters.Binary.BinaryFormatter lcFormatter =
+                    new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
 
                 lcFormatter.Serialize(lcFileStream, this);
                 lcFileStream.Close();
@@ -69,8 +70,8 @@ namespace Version_1_C
             try
             {
                 System.IO.FileStream lcFileStream = new System.IO.FileStream(_FileName, System.IO.FileMode.Open);
-                System.Runtime.Serialization.Formatters.Soap.SoapFormatter lcFormatter =
-                    new System.Runtime.Serialization.Formatters.Soap.SoapFormatter();
+                System.Runtime.Serialization.Formatters.Binary.BinaryFormatter lcFormatter =
+                    new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
 
                 lcArtistList = (clsArtistList)lcFormatter.Deserialize(lcFileStream); //Not sure if it should be lcArtistList here 
                 lcFileStream.Close();

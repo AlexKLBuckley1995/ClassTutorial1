@@ -1,11 +1,11 @@
 using System;
-using System.Collections;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Version_1_C
 {
     [Serializable()] 
-    public class clsWorksList : ArrayList
+    public class clsWorksList : List<clsWork>
     {
         private static clsNameComparer _NameComparer = new clsNameComparer();
         private static clsDateComparer _DateComparer = new clsDateComparer();
