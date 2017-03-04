@@ -12,17 +12,50 @@ namespace Version_1_C
         [NonSerialized()]
         private static frmSculpture sculptureDialog;
 
+        public float Weight
+        {
+            get
+            {
+                return _Weight;
+            }
+
+            set
+            {
+                _Weight = value;
+            }
+        }
+
+        public string Material
+        {
+            get
+            {
+                return _Material;
+            }
+
+            set
+            {
+                _Material = value;
+            }
+        }
+
+        public static frmSculpture SculptureDialog
+        {
+            get
+            {
+                return sculptureDialog;
+            }
+
+            set
+            {
+                sculptureDialog = value;
+            }
+        }
+
         public override void editDetails()
         {
-            if (sculptureDialog == null)
-            {
-                sculptureDialog = new frmSculpture();
-            }
-            sculptureDialog.SetDetails(_Name, _Date, _Value, _Weight, _Material);
-            if(sculptureDialog.ShowDialog() == DialogResult.OK)
-            {
-                sculptureDialog.GetDetails(ref _Name, ref _Date, ref _Value, ref _Weight, ref _Material);
-            }
+            if (SculptureDialog == null)
+                SculptureDialog = new frmSculpture();
+            SculptureDialog.SetDetails(this);
         }
     }
 }

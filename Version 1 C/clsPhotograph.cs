@@ -13,17 +13,63 @@ namespace Version_1_C
         [NonSerialized()]
         private static frmPhotograph photoDialog;
 
-        public override void editDetails()
+        public float Width
         {
-            if (photoDialog == null)
+            get
             {
-                photoDialog = new frmPhotograph();
+                return _Width;
             }
-            photoDialog.SetDetails(_Name, _Date, _Value, _Width, _Height, _Type);
-            if(photoDialog.ShowDialog() == DialogResult.OK)
+
+            set
             {
-                photoDialog.GetDetails(ref _Name, ref _Date, ref _Value, ref _Width, ref _Height, ref _Type);
+                _Width = value;
             }
         }
+
+        public float Height
+        {
+            get
+            {
+                return _Height;
+            }
+
+            set
+            {
+                _Height = value;
+            }
+        }
+
+        public string Type
+        {
+            get
+            {
+                return _Type;
+            }
+
+            set
+            {
+                _Type = value;
+            }
+        }
+
+        public static frmPhotograph PhotoDialog
+        {
+            get
+            {
+                return photoDialog;
+            }
+
+            set
+            {
+                photoDialog = value;
+            }
+        }
+
+        public override void editDetails()
+        {
+            if (PhotoDialog == null)
+                PhotoDialog = new frmPhotograph();
+            PhotoDialog.SetDetails(this);
+       }
     }
 }
