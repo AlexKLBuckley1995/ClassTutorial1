@@ -54,7 +54,7 @@ namespace Version_1_C
         }
 
         public abstract void editDetails();
-
+       
          public static clsWork NewWork()
          {
              char lcReply;

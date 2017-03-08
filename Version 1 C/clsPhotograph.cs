@@ -11,7 +11,7 @@ namespace Version_1_C
         private string _Type;
 
         [NonSerialized()]
-        private static frmPhotograph photoDialog;
+        private static frmPhotograph _PhotoDialog;
 
         public float Width
         {
@@ -56,12 +56,12 @@ namespace Version_1_C
         {
             get
             {
-                return photoDialog;
+                return _PhotoDialog;
             }
 
             set
             {
-                photoDialog = value;
+                _PhotoDialog = value;
             }
         }
 
