@@ -34,8 +34,16 @@ namespace Version_1_C
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            _ArtistList.NewArtist();
-            updateDisplay();
+            try
+            {
+                _ArtistList.NewArtist();
+                updateDisplay();
+                MessageBox.Show("Artist added!");
+            } catch ( Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Duplicate Key!");
+            }
+          
         }
 
         private void lstArtists_DoubleClick(object sender, EventArgs e)
@@ -43,6 +51,7 @@ namespace Version_1_C
             string lcKey;
 
             lcKey = Convert.ToString(lstArtists.SelectedItem);
+            
             if (lcKey != null)
             {
                 _ArtistList.EditArtist(lcKey);
@@ -52,7 +61,14 @@ namespace Version_1_C
 
         private void btnQuit_Click(object sender, EventArgs e)
         {
-            _ArtistList.Save();
+            try
+            {
+                _ArtistList.Save();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "File save Error");
+            }
             Close();
         }
 
@@ -73,7 +89,14 @@ namespace Version_1_C
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            _ArtistList.Retrieve();
+            try
+            {
+                _ArtistList.Retrieve();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "File retrieve error");
+            }
             updateDisplay();
         }
     }

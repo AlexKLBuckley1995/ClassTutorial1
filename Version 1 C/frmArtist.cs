@@ -63,7 +63,13 @@ namespace Version_1_C
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            _WorksList.DeleteWork(lstWorks.SelectedIndex);
+            if (lstWorks.SelectedIndex >= 0 && lstWorks.SelectedIndex < _WorksList.Count)
+            {
+                if (MessageBox.Show("Are you sure?", "Deleting work", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    _WorksList.RemoveAt(lstWorks.SelectedIndex);
+                }
+            }
             updateDisplay();
         }
 
@@ -99,11 +105,16 @@ namespace Version_1_C
         private void lstWorks_DoubleClick(object sender, EventArgs e)
         {
             int lcIndex = lstWorks.SelectedIndex;
-            if (lcIndex >= 0)
+            if (lcIndex >= 0 && lcIndex < _WorksList.Count)
             {
                 _WorksList.EditWork(lcIndex);
-                updateDisplay();
+            
             }
+            else
+            {
+                MessageBox.Show("Sorry no work selected #" + Convert.ToString(lcIndex));
+            }
+            updateDisplay();
         }
 
         private void rbByDate_CheckedChanged(object sender, EventArgs e)

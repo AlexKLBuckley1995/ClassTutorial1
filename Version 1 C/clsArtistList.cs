@@ -11,12 +11,12 @@ namespace Version_1_C
         private const string _FileName = "gallery.xml";
         public void EditArtist(string prKey)
         {
-            clsArtist lcArtist;
-            lcArtist = this[prKey];
-            if (lcArtist != null)
-                lcArtist.EditDetails();
-            else
-                MessageBox.Show("Sorry no artist by this name");
+                clsArtist lcArtist;
+                lcArtist = this[prKey];
+                if (lcArtist != null)
+                    lcArtist.EditDetails();
+                else
+                    throw new Exception("Sorry no artist by this name");
         }
        
         public void NewArtist()
@@ -27,12 +27,12 @@ namespace Version_1_C
                 if (lcArtist.Name != "")
                 {
                     Add(lcArtist.Name, lcArtist);
-                    MessageBox.Show("Artist added!");
+                   
                 }
             }
             catch (Exception)
             {
-                MessageBox.Show("Duplicate Key!");
+                throw new Exception("Duplicate Key!");
             }
         }
         
@@ -59,7 +59,7 @@ namespace Version_1_C
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "File Save Error");
+                throw new Exception("File Save Error");
             }
         }
 
@@ -80,7 +80,7 @@ namespace Version_1_C
             catch (Exception e)
             {
                 lcArtistList = new Version_1_C.clsArtistList();
-                MessageBox.Show(e.Message, "File Retrieve Error");
+                throw new Exception("File Retrieve Error");
             }
             return lcArtistList;
         }
