@@ -55,29 +55,31 @@ namespace Version_1_C
 
         public abstract void editDetails();
        
-         public static clsWork NewWork()
+         public static clsWork NewWork(char prReply)
          {
-             char lcReply;
-             InputBox inputBox = new InputBox("Enter P for Painting, S for Sculpture and H for Photograph");
-             //inputBox.ShowDialog();
-             //if (inputBox.getAction() == true)
-             if (inputBox.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-             {
-                 lcReply = Convert.ToChar(inputBox.getAnswer());
+           //  char lcReply;
+             //InputBox inputBox = new InputBox("Enter P for Painting, S for Sculpture and H for Photograph");
+            //inputBox.ShowDialog();
+            //if (inputBox.getAction() == true)
 
-                 switch (char.ToUpper(lcReply))
-                 {
-                     case 'P': return new clsPainting();
-                     case 'S': return new clsSculpture();
-                     case 'H': return new clsPhotograph();
-                     default: return null;
-                 }
-             }
-             else
-             {
-                 inputBox.Close();
-                 return null;
-             }
+       //         if (inputBox.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+         //        {
+           //         lcReply = Convert.ToChar(inputBox.getAnswer());
+
+                    switch (char.ToUpper(prReply))
+                    {
+                        case 'P': return new clsPainting();
+                        case 'S': return new clsSculpture();
+                        case 'H': return new clsPhotograph();
+                        default: return null;
+                    }
+             //   }
+     
+       //      else
+         //    {
+           //     inputBox.Close();
+             //   return null;
+          //    }
          }
 
         public override string ToString()

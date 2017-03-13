@@ -75,9 +75,21 @@ namespace Version_1_C
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            _WorksList.AddWork();
-            updateDisplay();
-        }
+            char lcReply;
+            InputBox inputBox = new InputBox("Enter P for Painting, S for Sculpture and H for Photograph");
+            //inputBox.ShowDialog();
+            //if (inputBox.getAction() == true)
+            if (inputBox.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                lcReply = Convert.ToChar(inputBox.getAnswer());
+                _WorksList.AddWork(lcReply);
+                updateDisplay();
+            }
+            else
+            {
+                inputBox.Close();
+            }
+}
 
         private void btnClose_Click(object sender, EventArgs e)
         {

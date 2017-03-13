@@ -24,9 +24,9 @@ namespace Version_1_C
             }
         }
 
-        public void AddWork()
+        public void AddWork(char prReply)
         {
-            clsWork lcWork = clsWork.NewWork();
+            clsWork lcWork = clsWork.NewWork(prReply);
             if (lcWork != null)
             {
                 Add(lcWork);
